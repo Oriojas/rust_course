@@ -86,3 +86,48 @@ Creamos una tupla escribiendo una lista de valores separados por comas dentro de
 
 ### El Tipo Arreglo
 Otra forma de tener una colección de múltiples valores es con un arreglo. A diferencia de una tupla, cada elemento de un arreglo debe tener el mismo tipo. A diferencia de los arreglos en algunos otros lenguajes, los arreglos en Rust tienen una longitud fija.
+
+## Funciones
+https://book.rustlang-es.org/ch03-03-how-functions-work
+
+El código en Rust usa snake case como estilo convencional para los nombres de funciones y variables, en el que todas las letras son minúsculas y los guiones bajos separan las palabras.
+
+A Rust no le importa dónde definas tus funciones, sólo que estén definidas en algún lugar en un ámbito que pueda ser visto por el invocador.
+
+```rust
+fn main() {
+    println!("Hello, world!");
+
+    another_function();
+}
+
+fn another_function() {
+    println!("Another function.");
+}
+
+```
+
+### Parámetros
+Podemos definir funciones para que tengan parámetros, que son variables especiales que forman parte de la firma de una función. Cuando una función tiene parámetros, puedes proporcionarle valores concretos para esos parámetros. Técnicamente, los valores concretos se llaman argumentos, pero coloquialmente, la gente tiende a usar las palabras parámetro y argumento indistintamente para las variables en la definición de una función o los valores concretos que se pasan cuando llamas a una función.
+
+```rust
+fn main() {
+    another_function(5);
+}
+
+fn another_function(x: i32) {
+    println!("The value of x is: {x}");
+}
+```
+
+### Sentencias y Expresiones
+Los cuerpos de las funciones están compuestos por una serie de sentencias opcionalmente terminadas en una expresión. 
+
+* **Sentencias** son instrucciones que realizan alguna acción y no devuelven un valor.
+* **Expresiones** evalúan a un valor resultante. Veamos algunos ejemplos.
+
+La sentencia ```let y = 6``` no devuelve un valor, por lo que no hay nada a lo que x se pueda vincular. Esto es diferente a lo que ocurre en otros lenguajes, como C y Ruby, donde la asignación devuelve el valor de la asignación. En esos lenguajes, puedes escribir ```x = y = 6``` y hacer que tanto x como y tengan el valor 6; eso no es el caso en Rust.
+
+### Funciones con valores de retorno
+Las funciones pueden devolver valores al código que las llama. No nombramos los valores de retorno, pero debemos declarar su tipo después de una flecha (->). En Rust, el valor de retorno de la función es sinónimo del valor de la última expresión en el bloque del cuerpo de una función. Puedes devolver un valor antes de que la función finalice utilizando la palabra clavereturn y especificando un valor, pero la mayoría de las funciones devuelven la última expresión implícitamente.
+
