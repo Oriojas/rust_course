@@ -132,6 +132,7 @@ La sentencia ```let y = 6``` no devuelve un valor, por lo que no hay nada a lo q
 Las funciones pueden devolver valores al código que las llama. No nombramos los valores de retorno, pero debemos declarar su tipo después de una flecha (->). En Rust, el valor de retorno de la función es sinónimo del valor de la última expresión en el bloque del cuerpo de una función. Puedes devolver un valor antes de que la función finalice utilizando la palabra clavereturn y especificando un valor, pero la mayoría de las funciones devuelven la última expresión implícitamente.
 
 ### Flujo de Control
+https://book.rustlang-es.org/ch03-05-control-flow
 La capacidad de ejecutar algún código dependiendo de si una condición es true y ejecutar algún código repetidamente mientras una condición es true son elementos básicos en la mayoría de los lenguajes de programación. Las construcciones más comunes que le permiten controlar el flujo de ejecución del código Rust son las expresiones if y los bucles.
 
 #### Expresiones if
@@ -145,6 +146,24 @@ fn main() {
         println!("condition was true");
     } else {
         println!("condition was false");
+    }
+}
+```
+
+#### Repetición con bucles
+A menudo es útil ejecutar un bloque de código más de una vez. Para esta tarea, Rust proporciona varios bucles, que ejecutarán el código dentro del cuerpo del bucle hasta el final y luego comenzarán de inmediato desde el principio. Para experimentar con los bucles, hagamos un nuevo proyecto llamado loops.
+
+Rust tiene tres tipos de bucles: loop, while y for. Vamos a probar cada uno.
+
+### Repetir código con loop
+La palabra clave loop le dice a Rust que ejecute un bloque de código una y otra vez para siempre o hasta que le indique explícitamente que se detenga.
+
+bucle infinito:
+
+```rust
+fn main() {
+    loop {
+        println!("again!");
     }
 }
 ```
