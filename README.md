@@ -131,3 +131,20 @@ La sentencia ```let y = 6``` no devuelve un valor, por lo que no hay nada a lo q
 ### Funciones con valores de retorno
 Las funciones pueden devolver valores al código que las llama. No nombramos los valores de retorno, pero debemos declarar su tipo después de una flecha (->). En Rust, el valor de retorno de la función es sinónimo del valor de la última expresión en el bloque del cuerpo de una función. Puedes devolver un valor antes de que la función finalice utilizando la palabra clavereturn y especificando un valor, pero la mayoría de las funciones devuelven la última expresión implícitamente.
 
+### Flujo de Control
+La capacidad de ejecutar algún código dependiendo de si una condición es true y ejecutar algún código repetidamente mientras una condición es true son elementos básicos en la mayoría de los lenguajes de programación. Las construcciones más comunes que le permiten controlar el flujo de ejecución del código Rust son las expresiones if y los bucles.
+
+#### Expresiones if
+Una expresión if le permite dividir su código según las condiciones. Proporciona una condición y luego dice: “Si se cumple esta condición, ejecute este bloque de código. Si la condición no se cumple, no ejecute este bloque de código.”
+
+```rust
+fn main() {
+    let number = 3;
+
+    if number < 5 {
+        println!("condition was true");
+    } else {
+        println!("condition was false");
+    }
+}
+```
