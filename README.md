@@ -131,11 +131,11 @@ La sentencia ```let y = 6``` no devuelve un valor, por lo que no hay nada a lo q
 ### Funciones con valores de retorno
 Las funciones pueden devolver valores al código que las llama. No nombramos los valores de retorno, pero debemos declarar su tipo después de una flecha (->). En Rust, el valor de retorno de la función es sinónimo del valor de la última expresión en el bloque del cuerpo de una función. Puedes devolver un valor antes de que la función finalice utilizando la palabra clavereturn y especificando un valor, pero la mayoría de las funciones devuelven la última expresión implícitamente.
 
-### Flujo de Control
+## Flujo de Control
 https://book.rustlang-es.org/ch03-05-control-flow
 La capacidad de ejecutar algún código dependiendo de si una condición es true y ejecutar algún código repetidamente mientras una condición es true son elementos básicos en la mayoría de los lenguajes de programación. Las construcciones más comunes que le permiten controlar el flujo de ejecución del código Rust son las expresiones if y los bucles.
 
-#### Expresiones if
+### Expresiones if
 Una expresión if le permite dividir su código según las condiciones. Proporciona una condición y luego dice: “Si se cumple esta condición, ejecute este bloque de código. Si la condición no se cumple, no ejecute este bloque de código.”
 
 ```rust
@@ -150,12 +150,12 @@ fn main() {
 }
 ```
 
-#### Repetición con bucles
+### Repetición con bucles
 A menudo es útil ejecutar un bloque de código más de una vez. Para esta tarea, Rust proporciona varios bucles, que ejecutarán el código dentro del cuerpo del bucle hasta el final y luego comenzarán de inmediato desde el principio. Para experimentar con los bucles, hagamos un nuevo proyecto llamado loops.
 
 Rust tiene tres tipos de bucles: loop, while y for. Vamos a probar cada uno.
 
-### Repetir código con loop
+#### Repetir código con loop
 La palabra clave loop le dice a Rust que ejecute un bloque de código una y otra vez para siempre o hasta que le indique explícitamente que se detenga.
 
 bucle infinito:
@@ -166,4 +166,31 @@ fn main() {
         println!("again!");
     }
 }
+```
+
+## Ownership?
+
+El ownership es un conjunto de reglas que definen cómo un programa de Rust administra la memoria. Todos los programas tienen que administrar la forma en que usan la memoria de un computador mientras se ejecutan. Algunos lenguajes tienen recolección de basura que busca regularmente la memoria que ya no se usa mientras el programa se ejecuta; en otros lenguajes, el programador debe asignar y liberar la memoria explícitamente. Rust usa un tercer enfoque: la memoria se administra a través de un sistema de ownership con un conjunto de reglas que el compilador verifica. Si alguna de las reglas se viola, el programa no se compilará. Ninguna de las características del ownership ralentizará su programa mientras se ejecuta.
+
+#### Nota
+La traducción de Ownership seria "Propiedad", la mayor parte de la comunidad habla de este sistema como Ownsership pero también es valido este termino. El motivo es que el sistema de ownership es solo una analogía.
+
+La analogía es que el ownership es como la propiedad de un objeto, por ejemplo si tienes un libro, el libro es tuyo. Si lo prestas a alguien, el libro sigue siendo tuyo, pero ahora el libro esta en posesión de otra persona. Cuando te devuelven el libro, el libro regresa a tu posesión.
+
+### Reglas de Ownership
+Primero, echemos un vistazo a las reglas de ownership. Mantenga estas reglas en mente mientras trabajamos a través de los ejemplos que las ilustran:
+
+* Cada valor en Rust tiene un propietario.
+* Solo puede haber un propietario a la vez.
+* Cuando el propietario sale del alcance, el valor se descartará.
+
+### Ámbito de las Variables
+La variable ```s``` se refiere a un literal de cadena, donde el valor de la cadena está codificado en el texto de nuestro programa. La variable es válida desde el punto en que se declara hasta el final del contexto de ejecución actual. A continuación se muestra un programa con comentarios que anotan dónde sería válida la variable s.
+
+```rust
+{                      // s no es valido aquí, aún no está declarado
+    let s = "hola";   // s es valido desde aquí
+
+    // Hacer algo con s
+}                      // este ámbito termina aquí, s ya no es valido
 ```
