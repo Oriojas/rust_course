@@ -168,7 +168,9 @@ fn main() {
 }
 ```
 
-## Ownership?
+## Ownership
+
+https://book.rustlang-es.org/ch04-01-what-is-ownership
 
 El ownership es un conjunto de reglas que definen cómo un programa de Rust administra la memoria. Todos los programas tienen que administrar la forma en que usan la memoria de un computador mientras se ejecutan. Algunos lenguajes tienen recolección de basura que busca regularmente la memoria que ya no se usa mientras el programa se ejecuta; en otros lenguajes, el programador debe asignar y liberar la memoria explícitamente. Rust usa un tercer enfoque: la memoria se administra a través de un sistema de ownership con un conjunto de reglas que el compilador verifica. Si alguna de las reglas se viola, el programa no se compilará. Ninguna de las características del ownership ralentizará su programa mientras se ejecuta.
 
@@ -176,6 +178,34 @@ El ownership es un conjunto de reglas que definen cómo un programa de Rust admi
 La traducción de Ownership seria "Propiedad", la mayor parte de la comunidad habla de este sistema como Ownsership pero también es valido este termino. El motivo es que el sistema de ownership es solo una analogía.
 
 La analogía es que el ownership es como la propiedad de un objeto, por ejemplo si tienes un libro, el libro es tuyo. Si lo prestas a alguien, el libro sigue siendo tuyo, pero ahora el libro esta en posesión de otra persona. Cuando te devuelven el libro, el libro regresa a tu posesión.
+
+### El Stack y el Heap
+
+#### Stack
+
+Tanto el stack como el heap son partes de la memoria disponible para su código para usar en tiempo de ejecución, pero están estructurados de formas diferentes. El stack almacena valores en el orden en que los recibe y elimina los valores en el orden opuesto. Esto se conoce como LIFO que es el acrónimo inglés de Last In, First Out o en español El último en entrar, es el primero en salir. Piense en una pila de platos: cuando agrega más platos, los coloca en la parte superior de la pila, y cuando necesita un plato, toma uno de la parte superior. Agregar o eliminar platos del medio o de la parte inferior no funcionaría tan bien! Agregar datos se llama empujar en el stack, y eliminar datos se llama sacar del stack. Todos los datos almacenados en el stack deben tener un tamaño conocido y fijo. Los datos con un tamaño desconocido en tiempo de compilación o un tamaño que puede cambiar deben almacenarse en el heap en su lugar.
+
+```rust
+fn main() {
+    let x = 42; // 'x' se almacena en el Stack
+    println!("El valor de x es: {}", x);
+}
+
+```
+
+#### Heap
+
+El heap es menos organizado: cuando coloca datos en el heap, solicita una cierta cantidad de espacio. El administrador de memoria encuentra un lugar vacío en el heap que sea lo suficientemente grande, lo marca como en uso y devuelve un puntero, que es la dirección de esa ubicación. Este proceso se llama asignar en el heap y a veces se abrevia como solo asignar (empujar valores en el stack no se considera asignar). Debido a que el puntero al heap es un tamaño conocido y fijo, puede almacenar el puntero en el stack, pero cuando desea los datos reales, debe seguir el puntero. Piense en estar sentado en un restaurante. Cuando ingresa, indica la cantidad de personas en su grupo, y el anfitrión encuentra una mesa vacía que quepa a todos y los lleva allí. Si alguien en su grupo llega tarde, puede preguntar dónde se ha sentado para encontrarlo.
+
+En resumen, el Stack es ideal para datos de tamaño fijo y de vida corta, mientras que el Heap es más adecuado para datos dinámicos y de vida más larga.
+
+```rust
+fn main() {
+    let y = Box::new(42); // 'y' es un puntero a un valor en el Heap
+    println!("El valor de y es: {}", y);
+}
+
+```
 
 ### Reglas de Ownership
 Primero, echemos un vistazo a las reglas de ownership. Mantenga estas reglas en mente mientras trabajamos a través de los ejemplos que las ilustran:
@@ -194,3 +224,23 @@ La variable ```s``` se refiere a un literal de cadena, donde el valor de la cade
     // Hacer algo con s
 }                      // este ámbito termina aquí, s ya no es valido
 ```
+
+### Referencias y Prestamos
+El simbolo ```&``` se usa para referencias. Una referencia es un puntero a un valor, pero no lo puede modificar. Por ejemplo:
+
+```rust
+fn main() {
+    let s1 = String::from("hola");
+
+    let len = calcular_longitud(&s1);
+
+    println!("La longitud de '{s1}' es {len}.");
+}
+
+fn calcular_longitud(s: &String) -> usize {
+    s.len()
+}
+```
+La sintaxis &s1 nos permite crear una referencia que se refiere al valor de s1 pero sin ser el propietario. Por este motivo, el valor al que apunta no se descartará cuando la referencia deje de usarse.
+
+![alt text](img/image.png)
