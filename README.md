@@ -226,6 +226,8 @@ La variable ```s``` se refiere a un literal de cadena, donde el valor de la cade
 ```
 
 ### Referencias y Prestamos
+https://book.rustlang-es.org/ch04-02-references-and-borrowing
+
 El simbolo ```&``` se usa para referencias. Una referencia es un puntero a un valor, pero no lo puede modificar. Por ejemplo:
 
 ```rust
@@ -244,3 +246,20 @@ fn calcular_longitud(s: &String) -> usize {
 La sintaxis &s1 nos permite crear una referencia que se refiere al valor de s1 pero sin ser el propietario. Por este motivo, el valor al que apunta no se descartará cuando la referencia deje de usarse.
 
 ![alt text](img/image.png)
+
+
+### Referencias Mutables
+
+Estas referencias permiten que el valor que se esta prestando pueda ser modificado, pero con las restriccion que solo se puede hacer una vez, solo sepuede modificar la referencia una vez.
+
+La restricción que impide múltiples referencias mutables a los mismos datos al mismo tiempo permite la mutación pero de una manera muy controlada. Es algo con lo que los nuevos en Rust luchan porque la mayoría de los lenguajes te permiten mutar cuando quieras. El beneficio de tener esta restricción es que Rust puede prevenir las carreras de datos en tiempo de compilación. Una carrera de datos es similar a una condición de carrera y ocurre cuando ocurren estos tres comportamientos:
+
+* Dos o más punteros acceden a los mismos datos al mismo tiempo.
+* Al menos uno de los punteros se está utilizando para escribir en los datos.
+* No hay ningún mecanismo que se esté utilizando para sincronizar el acceso a los datos.
+
+### Referencias colgantes
+
+En lenguajes con punteros, es fácil crear accidentalmente un puntero colgante: un puntero que hace referencia a una ubicación en la memoria que puede haber sido otorgada a otra persona, al liberar algo de memoria mientras se preserva un puntero a esa memoria. En Rust, por el contrario, el compilador garantiza que las referencias nunca serán referencias colgantes: si tiene una referencia a algún dato, el compilador asegurará que los datos no salgan de contexto de ejecución antes de que la referencia a los datos lo haga.
+
+https://book.rustlang-es.org/ch04-03-slices
