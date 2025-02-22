@@ -263,5 +263,20 @@ La restricción que impide múltiples referencias mutables a los mismos datos al
 En lenguajes con punteros, es fácil crear accidentalmente un puntero colgante: un puntero que hace referencia a una ubicación en la memoria que puede haber sido otorgada a otra persona, al liberar algo de memoria mientras se preserva un puntero a esa memoria. En Rust, por el contrario, el compilador garantiza que las referencias nunca serán referencias colgantes: si tiene una referencia a algún dato, el compilador asegurará que los datos no salgan de contexto de ejecución antes de que la referencia a los datos lo haga.
 
 ### El tipo Slice
-
 https://book.rustlang-es.org/ch04-03-slices
+Los Slices te permiten referenciar a una secuencia contigua de elementos en una colección en lugar de la colección completa. Un slice es una especie de referencia, por lo que no tiene ownership.
+
+Recordemos ejemplos de colecciones:
+
+* Un vector le permite almacenar un número variable de valores uno al lado del otro.
+* Un string es una colección de caracteres. Hemos mencionado el tipo String anteriormente, pero en este capítulo hablaremos de él en profundidad.
+* Un hash map le permite asociar un valor con una clave especifica. Es una implementación particular de la estructura de datos más general llamada map.
+
+Los slices permiten acceder a una porción de datos sin necesidad de copiarla.
+
+**Ventajas de Usar Slices**
+
+* Eficiencia: No se copia el string completo, solo se crea una referencia a una parte del string.
+* Seguridad: Rust garantiza que los slices siempre sean válidos mientras el string original no sea modificado.
+
+https://book.rustlang-es.org/ch05-01-defining-structs
