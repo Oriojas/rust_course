@@ -279,4 +279,30 @@ Los slices permiten acceder a una porción de datos sin necesidad de copiarla.
 * Eficiencia: No se copia el string completo, solo se crea una referencia a una parte del string.
 * Seguridad: Rust garantiza que los slices siempre sean válidos mientras el string original no sea modificado.
 
-https://book.rustlang-es.org/ch05-01-defining-structs
+### Structs
+Como en las tuplas, las partes de un struct pueden ser de diferentes tipos. A diferencia de las tuplas, en un struct tú nombras a cada pieza de datos para que quede claro, que significan estos valores. Agregando estos nombres significa que los structs son más flexibles que las tuplas: no tienes que confiar en el orden de los datos para especificar o acceder a los valores de una instancia.
+
+Para definir un struct, debemos usar la palabra clave struct y el nombre del struct completo. El nombre del struct debe describir el significado de los datos que se agrupan. Entonces, entre llaves, definimos los nombres y tipos de datos, que llamaremos campos. 
+
+**Ejemplo struct**
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+```
+
+Para usar un struct después de haberlo definido, creamos una instancia de ese struct especificando valores concretos para cada uno de los campos. Creamos una instancia al declarar el nombre del struct y luego agregar llaves que contienen clave: valor pares, donde las claves son los nombres de los campos y los valores son los datos que queremos almacenar en esos campos. No tenemos que especificar los campos en el mismo orden en el que los declaramos en el struct. En otras palabras, la definición del struct es como una plantilla general para el tipo, y las instancias llenan esa plantilla con datos particulares para crear valores del tipo.
+
+```rust
+fn main() {
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+}
+```
