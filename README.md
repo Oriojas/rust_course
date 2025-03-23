@@ -319,3 +319,4 @@ fn main() {
     let origin = Point(0, 0, 0);
 }
 ```
+Ejercicio de structs en **rectangles**
