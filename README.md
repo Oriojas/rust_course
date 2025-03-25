@@ -320,3 +320,10 @@ fn main() {
 }
 ```
 Ejercicio de structs en **rectangles**
+
+## Sintaxis de Métodos
+
+
+
+Los métodos son similares a las funciones: los declaramos con la palabra clave fn y un nombre, pueden tener parámetros y un valor de retorno, y contienen alguno código que se ejecuta cuando el método es llamado desde otro lugar. A diferencia de las funciones, los métodos se definen dentro del contexto de una estructura y su primer parámetro siempre es *self*, que representa la instancia de la estructura en la que se está llamando al método.
+
